@@ -27,6 +27,7 @@ class TapToExpand extends StatefulWidget {
   /// The [outerClosedPadding] parameter is used to define the padding of the widget when it's closed.
   /// The [outerOpenedPadding] parameter is used to define the padding of the widget when it's opened.
   /// The [curve] parameter is used to define the curve of the expand animation.
+  /// The [decoration] parameter is used to define the decoration of the widget. If set, backgroundcolor and borderRadius will be ignored.
   const TapToExpand({
     super.key,
     this.width,
@@ -46,6 +47,7 @@ class TapToExpand extends StatefulWidget {
     this.outerClosedPadding,
     this.outerOpenedPadding,
     this.curve,
+    this.decoration,
   });
 
   final Widget title;
@@ -61,6 +63,7 @@ class TapToExpand extends StatefulWidget {
   final Curve? curve;
   final Duration duration;
   final Color? backgroundcolor;
+  final Decoration? decoration;
   final Color? iconColor;
   final double? iconSize;
   final BorderRadius? borderRadius;
@@ -160,11 +163,11 @@ class _TapToExpandState extends State<TapToExpand>
       // Sets the margin of the container based on the value of paddingAnimation.
       margin: EdgeInsets.symmetric(horizontal: paddingAnimation.value),
 
-      // Sets the decoration of the container to a BoxDecoration with the specified properties.
+      // If no custom decoration is provided, sets the decoration of the container to a BoxDecoration with the specified properties.
       // If no background color is specified, it sets the color to the primary color of the theme.
       // It also sets a box shadow to give a 3D effect to the container.
       // If no border radius is specified, it sets the border radius to a circular border radius of 12.
-      decoration: BoxDecoration(
+      decoration: widget.decoration ?? BoxDecoration(
         color: widget.backgroundcolor ?? Theme.of(context).primaryColor,
         boxShadow: [
           BoxShadow(
